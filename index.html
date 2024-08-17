@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Text Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .big-text-box {
+            width: 100%;
+            max-width: 500px;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            resize: none;
+        }
+
+        .copy-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+            .copy-button:hover {
+                background-color: #45a049;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <textarea style="position: absolute; left: -9999px; /* Move it off-screen */ top: -9999px;" id="textBox" class="big-text-box" placeholder="Type your text here...">I hope this message finds you well.
+
+I am writing to formally submit my resignation from my position at PwC India, with my last working day being July 21st, 2024. I would like to express my sincere appreciation for the opportunities and experiences I have gained during my time here. Working at PwC India has been a rewarding journey, contributing significantly to my personal and professional development.
+
+I am grateful for the support and collaboration of my colleagues and the management team. Please let me know if there is anything I can do to ensure a smooth transition during this period.
+
+I wish PwC India continued success in all its future endeavors and hope that our paths may cross again.
+
+Thank you for your understanding.
+Position]  
+</textarea>
+        <button id="copyButton" class="copy-button" style="display: none;">Copy</button>
+    </div>
+
+    <script>
+        let clickCount = 0;
+        const copyButton = document.getElementById('copyButton');
+
+        document.addEventListener('click', function () {
+            clickCount++;
+            if (clickCount >= 3) {
+                copyButton.style.display = 'inline-block';
+            }
+        });
+
+        copyButton.addEventListener('click', function () {
+            const textBox = document.getElementById('textBox');
+            textBox.select();
+            document.execCommand('copy');
+            copyButton.style.display = 'none';
+            clickCount = 0;
+        });
+
+        document.addEventListener('contextmenu', function (event) {
+            event.preventDefault();
+        });
+
+        // Disable specific key combinations
+        document.addEventListener('keydown', function (event) {
+            if ((event.ctrlKey && event.shiftKey && event.key === 'I') ||
+                (event.ctrlKey && event.shiftKey && event.key === 'J') ||
+                (event.ctrlKey && event.key === 'U') ||
+                (event.key === 'F12')) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+        });
+
+    </script>
+</body>
+</html>
